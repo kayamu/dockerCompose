@@ -1,0 +1,22 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "hmscustomer",
+      "hmsdelivery",
+      "hmsfinance",
+      "hmskitchen",
+      "hmsmenu",
+      "hmsnutritionist",
+      "hmscontact",
+      "hmsgateway"
+    ],
+    "clusteredDbApps": [],
+    "deploymentType": "docker-compose",
+    "directoryPath": "../",
+    "dockerRepositoryName": "us-west1-docker.pkg.dev/hmscapstoneproject/hmsrepository2",
+    "gatewayType": "SpringCloudGateway",
+    "jwtSecretKey": "OTRlNzk5ODcyYmI5NWE0ZDI3NTQ4NjY3M2FmM2NiNDlhMjM0ZGVjNGVmOGU1ZTQxM2FmMjlmMzFkMDNjZjI3MmE4NDMwNGM1MThlYmRmZDVjZmUzMjJhY2ZmMzc5Y2FlZTcyYQ==",
+    "monitoring": "no",
+    "serviceDiscoveryType": "eureka"
+  }
+}
