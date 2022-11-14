@@ -13,6 +13,10 @@ services:
       - JHIPSTER_REGISTRY_PASSWORD=admin
   hmscustomer-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/customer-db:/var/lib/postgresql/data
+    ports: 
+      - "5460:5432"
     environment:
       - POSTGRES_USER=hmscustomer
       - POSTGRES_PASSWORD=
@@ -32,6 +36,10 @@ services:
       - JHIPSTER_REGISTRY_PASSWORD=admin
   hmsdelivery-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/delivery-db:/var/lib/postgresql/data
+    ports: 
+      - "5461:5432"
     environment:
       - POSTGRES_USER=hmsdelivery
       - POSTGRES_PASSWORD=
@@ -51,6 +59,10 @@ services:
       - JHIPSTER_REGISTRY_PASSWORD=admin
   hmsfinance-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/finance-db:/var/lib/postgresql/data
+    ports: 
+      - "5462:5432"
     environment:
       - POSTGRES_USER=hmsfinance
       - POSTGRES_PASSWORD=
@@ -70,6 +82,10 @@ services:
       - JHIPSTER_REGISTRY_PASSWORD=admin
   hmskitchen-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/kitchen-db:/var/lib/postgresql/data
+    ports: 
+      - "5463:5432"
     environment:
       - POSTGRES_USER=hmskitchen
       - POSTGRES_PASSWORD=
@@ -89,6 +105,10 @@ services:
       - JHIPSTER_REGISTRY_PASSWORD=admin
   hmsmenu-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/menu-db:/var/lib/postgresql/data
+    ports: 
+      - "5464:5432"
     environment:
       - POSTGRES_USER=hmsmenu
       - POSTGRES_PASSWORD=
@@ -108,6 +128,10 @@ services:
       - JHIPSTER_REGISTRY_PASSWORD=admin
   hmsnutritionist-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/nutritionist-db:/var/lib/postgresql/data
+    ports: 
+      - "5465:5432"
     environment:
       - POSTGRES_USER=hmsnutritionist
       - POSTGRES_PASSWORD=
@@ -127,6 +151,10 @@ services:
       - JHIPSTER_REGISTRY_PASSWORD=admin
   hmscontact-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/contact-db:/var/lib/postgresql/data
+    ports: 
+      - "5466:5432"
     environment:
       - POSTGRES_USER=hmscontact
       - POSTGRES_PASSWORD=
@@ -145,9 +173,13 @@ services:
       - JHIPSTER_SLEEP=60
       - JHIPSTER_REGISTRY_PASSWORD=admin
     ports:
-      - "8087:8080"
+      - "80:8080"
   hmsgateway-postgresql:
     image: postgres:14.5
+    volumes: 
+      - /mnt/disks/vol-db/gateway-db:/var/lib/postgresql/data
+    ports: 
+      - "5467:5432"
     environment:
       - POSTGRES_USER=hmsgateway
       - POSTGRES_PASSWORD=
