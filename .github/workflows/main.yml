@@ -1,0 +1,58 @@
+name: Docker Compose Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GAR_LOCATION: us-west1 # TODO: update region of the Artifact Registry
+  GKE_CLUSTER: hmscluster    # TODO: update to cluster name
+  GKE_ZONE: us-west1   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: "hmscontact-deployment" # TODO: update to deployment name
+  REPOSITORY: hmsrepository2 # TODO: update to Artifact Registry docker repository
+  IMAGE: hmscontact
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+
+    # Alternative option - authentication via credentials json
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GKE_SA_KEY }}'
+        
+        
+       
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    #- run: |-
+    #    gcloud --quiet auth configure-docker
+        
+    - name: Login to GCR
+      uses: docker/login-action@v2
+      with:
+        registry: us-west1-docker.pkg.dev/hmscapstoneproject/hmsregistry2
+        username: _json_key
+        password: ${{ secrets.GKE_SA_KEY }}        
+        
+    - id: 'compute-ssh'
+      uses: 'google-github-actions/ssh-compute@v0'
+      with:
+        instance_name: 'docker-instance'
+        region: 'us-west1'
+        ssh_private_key: '${{ secrets.GKE_SA_KEY }}'
+        command: 'gcloud compute copy-files . docker-instance:~/ --region=us-west1'
